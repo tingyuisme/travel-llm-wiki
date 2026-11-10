@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>冬日山陰・雪與湯之旅｜2027 鳥取・島根 8天7夜自駕手帖</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --washi-bg: #FAF6F0;
+      --oatmeal: #F2EAE0;
+      --card-surface: #FFFDF9;
+      --hojicha: #3E3028;
+      --hojicha-muted: #6E5D53;
+      --kaki: #C85A32;
+      --kaki-soft: #FDF1EC;
+      --matsu: #4A6B5B;
+      --matsu-soft: #EEF5F1;
+      --kitsune: #B87D3B;
+      --kitsune-soft: #FBF5EB;
+      --hairline: #E2D9CC;
+      --shadow-warm: 0 10px 28px rgba(62, 48, 40, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: #261F1B;
+      background-image: radial-gradient(#382E28 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--hojicha);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nw {
+      white-space: nowrap;
+    }
+
+    /* 頂部快速章節導覽列 */
+    .top-nav {
+      width: min(96vw, calc(85vh * 16 / 9));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      background: rgba(250, 246, 240, 0.94);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+
+    .nav-pills {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .nav-pill {
+      background: transparent;
+      border: none;
+      color: var(--hojicha-muted);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .nav-pill:hover {
+      background: var(--oatmeal);
+      color: var(--hojicha);
+    }
+    .nav-pill.active {
+      background: var(--kaki);
+      color: #FFFDF9;
+      font-weight: 700;
+    }
+
+    /* 主簡報舞台 (16:9) */
+    .deck-stage {
+      position: relative;
+      width: min(96vw, calc(85vh * 16 / 9));
+      height: min(85vh, calc(96vw * 9 / 16));
+      background-color: var(--washi-bg);
+      background-image:
+        linear-gradient(90deg, rgba(226, 217, 204, 0.25) 1px, transparent 1px),
+        linear-gradient(rgba(226, 217, 204, 0.25) 1px, transparent 1px);
+      background-size: 48px 48px;
+      border-radius: 18px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+      border: 1px solid #E6DEC8;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 2.5% 3.8%;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      overflow-y: auto;
+    }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* ==========================================================
+       全新雙層日系雜誌風頁眉 (.mag-header)
+       第一層：左 Kicker 日期區域標籤 ＋ 右 自駕路線膠囊（消除右上空白）
+       第二層：100% 全寬單行大標題（絕不斷成奇怪的兩三行）
+       ========================================================== */
+    .mag-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-bottom: 2px solid var(--hojicha);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+    .mag-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+    .mag-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(11px, 0.95vw, 13.5px);
+      letter-spacing: 1.2px;
+      color: var(--kaki);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .mag-kicker::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--kaki);
+      border-radius: 50%;
+    }
+    .mag-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--oatmeal);
+      border: 1px solid var(--hairline);
+      padding: 4px 13px;
+      border-radius: 999px;
+      font-size: clamp(11px, 0.95vw, 13.5px);
+      color: var(--hojicha);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .mag-header h1 {
+      font-family: "Noto Serif TC", "Georgia", serif;
+      font-size: clamp(19px, 2.05vw, 28px);
+      font-weight: 900;
+      color: var(--hojicha);
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* 封面專頁設計 */
+    .slide.cover-slide {
+      background: linear-gradient(135deg, #FAF6F0 0%, #F2EAE0 100%);
+      justify-content: space-between;
+      padding: 3.4% 4.6%;
+    }
+    .cover-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--hojicha);
+      padding-bottom: 9px;
+      font-size: clamp(11px, 0.95vw, 13.5px);
+      letter-spacing: 2px;
+      color: var(--hojicha-muted);
+      font-weight: 600;
+    }
+    .cover-main {
+      display: grid;
+      grid-template-columns: 1.22fr 0.98fr;
+      gap: 32px;
+      align-items: center;
+      margin: auto 0;
+    }
+    .cover-issue-tag {
+      display: inline-block;
+      background: var(--kaki);
+      color: #FFFDF9;
+      padding: 4px 14px;
+      border-radius: 4px;
+      font-size: clamp(11px, 0.95vw, 13.5px);
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .cover-title {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(26px, 3.2vw, 46px);
+      line-height: 1.28;
+      color: var(--hojicha);
+      margin-bottom: 14px;
+      font-weight: 900;
+    }
+    .cover-subtitle {
+      font-size: clamp(13.5px, 1.22vw, 17.5px);
+      color: var(--hojicha-muted);
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+    .cover-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .spec-box {
+      background: var(--card-surface);
+      border: 1px solid var(--hairline);
+      border-left: 4px solid var(--kaki);
+      padding: 9px 13px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-warm);
+    }
+    .spec-label {
+      font-size: 11px;
+      color: var(--hojicha-muted);
+      letter-spacing: 1px;
+    }
+    .spec-val {
+      font-size: clamp(12.5px, 1.08vw, 15.5px);
+      font-weight: 700;
+      color: var(--hojicha);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+    .polaroid-hero {
+      background: #FFFDF9;
+      padding: 14px 14px 22px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--hairline);
+      box-shadow: 0 18px 40px rgba(62, 48, 40, 0.12);
+      transform: rotate(1.2deg);
+      text-align: center;
+    }
+    .polaroid-caption {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(12px, 1.02vw, 15px);
+      color: var(--hojicha-muted);
+      margin-top: 10px;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+    }
+
+    /* 通用網格與文青卡片 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      flex: 1;
+      align-items: stretch;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+    .grid-day-layout {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 18px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    .paper-card {
+      background: var(--card-surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: var(--shadow-warm);
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .paper-card h3 {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(14px, 1.25vw, 18px);
+      color: var(--hojicha);
+      border-bottom: 1px dashed var(--hairline);
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .paper-card ul {
+      padding-left: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: clamp(12px, 1.05vw, 15px);
+      line-height: 1.52;
+      color: var(--hojicha);
+    }
+
+    /* 每日時間軸 (Editorial Timeline) */
+    .day-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: space-between;
+    }
+    .time-block {
+      background: var(--card-surface);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 9px 14px;
+      display: grid;
+      grid-template-columns: 102px 1fr;
+      gap: 11px;
+      align-items: start;
+      box-shadow: 0 3px 10px rgba(62, 48, 40, 0.03);
+    }
+    .time-badge {
+      background: var(--oatmeal);
+      color: var(--hojicha);
+      font-family: "Noto Serif TC", serif;
+      font-weight: 700;
+      font-size: clamp(11px, 0.95vw, 13.5px);
+      padding: 4px 6px;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid var(--hairline);
+      white-space: nowrap;
+    }
+    .time-badge.highlight {
+      background: var(--kaki-soft);
+      color: var(--kaki);
+      border-color: #F3C6B6;
+    }
+    .time-body {
+      font-size: clamp(12px, 1.04vw, 14.8px);
+      line-height: 1.48;
+      color: var(--hojicha);
+    }
+    .time-body strong {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(13px, 1.12vw, 16px);
+      color: var(--hojicha);
+    }
+    .time-body > strong {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .time-desc, .postcard p, .paper-card p, .paper-card li, .note-banner, .check-item span, table.editorial-table td {
+      text-wrap: pretty;
+    }
+    .time-desc {
+      color: var(--hojicha-muted);
+      font-size: clamp(11.5px, 0.98vw, 14px);
+      margin-top: 2px;
+      line-height: 1.46;
+    }
+
+    /* ==========================================================
+       修正右側明信片卡片 (.postcard)
+       取消 position: absolute，改用 .postcard-head Flex 並排
+       保證郵戳標籤與標題永遠不會重疊！
+       ========================================================== */
+    .postcard-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .postcard {
+      background: #FFFDF9;
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 12px 15px;
+      box-shadow: var(--shadow-warm);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .postcard-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px dashed var(--hairline);
+      padding-bottom: 5px;
+    }
+    .postcard-head h4 {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(13.5px, 1.16vw, 16.8px);
+      color: var(--hojicha);
+      margin: 0;
+      white-space: nowrap;
+    }
+    .postcard-stamp {
+      border: 1.5px dashed var(--kaki);
+      color: var(--kaki);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .postcard p {
+      font-size: clamp(11.8px, 1vw, 14.2px);
+      color: var(--hojicha-muted);
+      line-height: 1.52;
+    }
+
+    /* Tag Pills 與外部連結按鈕 */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+      align-items: center;
+    }
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag-food { background: var(--kitsune-soft); color: var(--kitsune); border: 1px solid #EED6B3; }
+    .tag-sight { background: var(--matsu-soft); color: var(--matsu); border: 1px solid #C5DDD0; }
+    .tag-onsen { background: var(--kaki-soft); color: var(--kaki); border: 1px solid #F3C6B6; }
+
+    .ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      color: var(--hojicha);
+      background: var(--oatmeal);
+      border: 1px solid var(--hairline);
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .ext-link:hover {
+      background: var(--kaki);
+      color: #fff;
+      border-color: var(--kaki);
+    }
+
+    /* 溫馨提醒框 */
+    .note-banner {
+      background: var(--kaki-soft);
+      border: 1px solid #F0C4B4;
+      border-left: 4px solid var(--kaki);
+      padding: 8px 13px;
+      border-radius: 8px;
+      font-size: clamp(11.5px, 0.98vw, 14px);
+      color: #7C2D12;
+      line-height: 1.48;
+      margin-top: auto;
+    }
+    .note-banner.green {
+      background: var(--matsu-soft);
+      border-color: #BBD7C8;
+      border-left-color: var(--matsu);
+      color: #234735;
+    }
+
+    /* 表格樣式 */
+    table.editorial-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-surface);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--hairline);
+      font-size: clamp(11.5px, 1.02vw, 14.5px);
+    }
+    table.editorial-table th {
+      background: var(--oatmeal);
+      color: var(--hojicha);
+      font-family: "Noto Serif TC", serif;
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1.5px solid var(--hojicha);
+      white-space: nowrap;
+    }
+    table.editorial-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--hairline);
+      color: var(--hojicha);
+      line-height: 1.42;
+    }
+
+    /* 互動式行前準備 Checkboxes */
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      background: var(--washi-bg);
+      border: 1px solid var(--hairline);
+      cursor: pointer;
+      font-size: clamp(11.8px, 1vw, 14.2px);
+      line-height: 1.45;
+      transition: all 0.15s;
+    }
+    .check-item:hover {
+      border-color: var(--kaki);
+    }
+    .check-item input[type="checkbox"] {
+      accent-color: var(--kaki);
+      width: 15px;
+      height: 15px;
+      margin-top: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .check-item.done span {
+      text-decoration: line-through;
+      color: var(--hojicha-muted);
+      opacity: 0.7;
+    }
+
+    /* 底部控制列 */
+    .bottom-bar {
+      width: min(96vw, calc(85vh * 16 / 9));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 7px;
+      color: #D6CBC1;
+      font-size: 12.5px;
+    }
+    .ctrl-btns {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .ctrl-btn {
+      background: #382E28;
+      color: #FAF6F0;
+      border: 1px solid #54463E;
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover {
+      background: var(--kaki);
+      border-color: var(--kaki);
+    }
+
+    .progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--oatmeal);
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--kaki);
+      transition: width 0.3s ease;
+    }
+
+    /* 縮圖總覽 Modal */
+    .overview-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 24, 20, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      padding: 32px 48px;
+      overflow-y: auto;
+    }
+    .overview-modal.open { display: flex; }
+    .overview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--washi-bg);
+      margin-bottom: 24px;
+      border-bottom: 1px solid #54463E;
+      padding-bottom: 12px;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .ov-card {
+      background: var(--washi-bg);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--hojicha);
+    }
+    .ov-card:hover, .ov-card.current {
+      border-color: var(--kaki);
+      transform: translateY(-3px);
+    }
+    .ov-num { font-size: 11px; color: var(--kaki); font-weight: 700; letter-spacing: 1px; }
+    .ov-title { font-family: "Noto Serif TC", serif; font-size: 15px; font-weight: 700; margin-top: 4px; }
+    .ov-sub { font-size: 12px; color: var(--hojicha-muted); margin-top: 6px; }
+
+    .vote-btn {
+      margin-top: auto;
+      background: var(--oatmeal);
+      border: 1.5px solid var(--hojicha);
+      color: var(--hojicha);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .vote-btn.selected {
+      background: var(--kaki);
+      border-color: var(--kaki);
+      color: #fff;
+    }
+
+    @media print {
+      body { background: #fff; height: auto; overflow: visible; display: block; }
+      .top-nav, .bottom-bar, .progress-track, .overview-modal { display: none !important; }
+      .deck-stage { width: 100%; height: auto; box-shadow: none; border: none; }
+      .slide { position: relative; display: flex !important; opacity: 1 !important; page-break-after: always; height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部快速章節跳頁導覽列 -->
+  <nav class="top-nav">
+    <div class="nav-pills" id="navPills"></div>
+    <button class="ctrl-btn" style="padding:4px 12px; font-size:12px;" onclick="toggleOverview()">☷ 縮圖總覽 (O)</button>
+  </nav>
+
+  <!-- 16:9 簡報主舞台 -->
+  <main class="deck-stage" id="deckStage">
+
+    <!-- ==================== SLIDE 1: 封面 ==================== -->
+    <section class="slide cover-slide active" data-nav="封面" data-title="冬日山陰・雪與湯之旅" data-sub="2027/02/12–02/19 鳥取・島根 8天7夜自駕手帖">
+      <div class="cover-top-bar">
+        <span>SAN'IN WINTER TRAVEL JOURNAL — ISSUE NO. 2027-02</span>
+        <span>TOTTORI × SHIMANE, JAPAN</span>
+      </div>
+      <div class="cover-main">
+        <div>
+          <span class="cover-issue-tag">8 DAYS 7 NIGHTS SELF-DRIVE TRIP</span>
+          <h1 class="cover-title">冬日山陰・<br>雪白砂丘與神話名湯之旅</h1>
+          <p class="cover-subtitle">
+            在一年之中最靜謐的二月，從米子鬼太郎機場出發。<br>
+            沿著日本海的雪浪與千年杉林，走訪鳥取砂丘與出雲大社，<br>
+            品嚐正值巔峰的松葉蟹，住進熱氣氤氳的湖上與美肌溫泉。
+          </p>
+          <div class="cover-specs">
+            <div class="spec-box">
+              <div class="spec-label">TRAVEL DATES</div>
+              <div class="spec-val">2027.02.12 (五) – 02.19 (五)</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">FLIGHT (TIGERAIR)</div>
+              <div class="spec-val">桃園 TPE ⇄ 米子 YGJ 直飛</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">MOBILITY</div>
+              <div class="spec-val">米子同站租還・4WD 雪胎自駕</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">HIGHLIGHTS</div>
+              <div class="spec-val">雪砂丘・松葉蟹・足立庭園・暖桌船</div>
+            </div>
+          </div>
+        </div>
+        <div class="polaroid-hero">
+          <svg viewBox="0 0 420 270" width="100%" style="border-radius:6px; display:block;">
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D8E2DC"/>
+                <stop offset="65%" stop-color="#F4EFE6"/>
+                <stop offset="100%" stop-color="#E6CCB2"/>
+              </linearGradient>
+            </defs>
+            <rect width="420" height="270" fill="url(#skyGrad)"/>
+            <circle cx="325" cy="70" r="34" fill="#C85A32" opacity="0.82"/>
+            <path d="M0 175 Q105 168 210 175 T420 172 L420 220 L0 220 Z" fill="#4A6B5B" opacity="0.75"/>
+            <polygon points="40,180 145,68 250,180" fill="#6E5D53"/>
+            <polygon points="103,113 145,68 187,113 168,120 145,108 122,122" fill="#FFFDF9"/>
+            <path d="M0 215 Q130 165 270 198 T420 185 L420 270 L0 270 Z" fill="#FFFDF9"/>
+            <path d="M90 270 Q220 195 420 215 L420 270 Z" fill="#F2EAE0"/>
+            <g transform="translate(290, 148)" fill="#C85A32">
+              <rect x="0" y="6" width="52" height="5" rx="2"/>
+              <rect x="4" y="14" width="44" height="3.5"/>
+              <rect x="11" y="10" width="4.5" height="38"/>
+              <rect x="36.5" y="10" width="4.5" height="38"/>
+            </g>
+            <circle cx="70" cy="50" r="2.5" fill="#FFFDF9"/>
+            <circle cx="190" cy="42" r="2" fill="#FFFDF9"/>
+            <circle cx="240" cy="85" r="3" fill="#FFFDF9"/>
+            <circle cx="95" cy="145" r="2" fill="#FFFDF9"/>
+            <circle cx="365" cy="120" r="2.5" fill="#FFFDF9"/>
+          </svg>
+          <div class="polaroid-caption">「伯耆富士」大山冠雪 × 雪白鳥取砂丘 × 出雲神話鳥居</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: 航班與雪地自駕哲學 ==================== -->
+    <section class="slide" data-nav="航班自駕" data-title="航班決策與二月雪地自駕慢旅哲學" data-sub="為什麼選擇「米子機場單點進出 ＋ 全程沿海自駕」？">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">CHAPTER 01 ｜ FLIGHT & WINTER DRIVING STRATEGY</span>
+          <span class="mag-meta-badge">✈️ 台灣虎航 IT724 / IT725 直飛米子</span>
+        </div>
+        <h1>航班決策與二月雪地自駕慢旅哲學</h1>
+      </div>
+
+      <div class="grid-2">
+        <div class="paper-card">
+          <h3>
+            <span>✈️ 方案 B：米子鬼太郎機場單點進出</span>
+            <a class="ext-link" href="https://www.tigerairtw.com/" target="_blank">🔗 虎航官網</a>
+          </h3>
+          <ul>
+            <li><strong>去程｜2027/02/12 (五) <code>IT 724</code></strong><br>台北桃園 (TPE) <strong>13:30</strong> ➔ 米子機場 (YGJ) <strong>16:50</strong>（飛行 2h20m）</li>
+            <li><strong>回程｜2027/02/19 (五) <code>IT 725</code></strong><br>米子機場 (YGJ) <strong>17:50</strong> ➔ 台北桃園 (TPE) <strong>20:00</strong>（飛行 3h10m）</li>
+            <li><strong>基準票價（tigersmart）</strong>：<strong>TWD 12,163 / 人</strong>（含稅與行李）</li>
+          </ul>
+          <div class="note-banner green">
+            💡 <strong>為什麼放棄「岡山進、米子出」？</strong><br>
+            岡山進機票雖便宜 NT$900，但跨縣租車甲租乙還費高達 <strong>¥8,800～¥15,400</strong>，且 2 月北上必須翻越<strong>中國山地豪雪封路區</strong>；米子同站借還異地費 <strong>¥0</strong> 且全程走平坦沿海公路！
+          </div>
+        </div>
+
+        <div class="paper-card">
+          <h3>
+            <span>🚗 二月山陰雪地自駕 4 大安心守則</span>
+            <a class="ext-link" href="https://www.yonago-air.com/" target="_blank">🔗 米子機場</a>
+          </h3>
+          <ul>
+            <li><strong>必選規格：4WD 四輪傳動 ＋ 雪胎（Studless Tires）</strong><br>預訂時務必勾選雪胎與 4WD，前往大山、三朝溫泉或清晨橋面結冰時抓地力最穩定。</li>
+            <li><strong>取車必查：長柄除雪刷 ＋ NOC 營業損失全免保險</strong><br>早晨出發前務必刷除車頂積雪，避免煞車時車頂積雪滑落遮蔽前擋風玻璃視線。</li>
+            <li><strong>冬日作息：把握 09:00–15:30 戶外黃金光線</strong><br>2月山陰約 17:30 日落，15:30 後改排室內美術館或直接進溫泉旅館享受一泊二食。</li>
+          </ul>
+          <div class="note-banner">
+            ⚠️ <strong>兩大冬季封路避雷</strong>：① 大山南側「鍵掛峠（大山環狀道路）」12～3月全面封路；② 前往日御碕的「島根縣道29號」局部為單線號誌輪流放行。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: 路線地圖與8日總覽 ==================== -->
+    <section class="slide" data-nav="路線地圖" data-title="山陰「東西雙翼 8 字型」自駕路線圖" data-sub="米子正中央樞紐出發，先東翼鳥取、後西翼島根，完美避開週二公休">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">CHAPTER 02 ｜ ROUTE MAP & SCHEDULE LOGIC</span>
+          <span class="mag-meta-badge">🧭 東翼鳥取 D1–D4 × 西翼島根 D5–D8</span>
+        </div>
+        <h1>山陰「東西雙翼 8 字型」不走回頭路自駕地圖</h1>
+      </div>
+
+      <div class="paper-card" style="padding: 10px 16px; flex: 0 0 auto;">
+        <svg viewBox="0 0 960 205" width="100%" style="display:block;">
+          <rect x="0" y="0" width="960" height="205" rx="10" fill="#F6F1E9"/>
+          <text x="480" y="22" text-anchor="middle" fill="#4A6B5B" font-size="12.5" font-weight="700" letter-spacing="2.5">〰 日本海 SEA OF JAPAN（平坦沿海國道 9 號 ＆ 山陰自動車道）〰</text>
+
+          <path d="M 470 105 C 410 148, 340 158, 270 148 C 180 138, 110 124, 85 90 C 70 62, 190 48, 320 60 C 400 68, 440 80, 470 105" fill="none" stroke="#4A6B5B" stroke-width="3.5" stroke-dasharray="7 5"/>
+          <path d="M 470 105 C 560 52, 730 48, 855 80 C 890 110, 770 148, 675 144 C 590 138, 530 134, 470 105" fill="none" stroke="#C85A32" stroke-width="3.5"/>
+
+          <circle cx="90" cy="90" r="9" fill="#4A6B5B"/><text x="90" y="116" text-anchor="middle" font-size="12" font-weight="700" fill="#3E3028">D6 出雲大社・日御碕</text>
+          <text x="90" y="132" text-anchor="middle" font-size="10.5" fill="#6E5D53">(住 Dormy Inn 出雲)</text>
+
+          <circle cx="255" cy="148" r="8.5" fill="#4A6B5B"/><text x="255" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#3E3028">D5 宍道湖・玉造溫泉</text>
+          <text x="255" y="187" text-anchor="middle" font-size="10.5" fill="#C85A32">(住 玉造長樂園 ♨️)</text>
+
+          <circle cx="310" cy="60" r="8.5" fill="#4A6B5B"/><text x="310" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#3E3028">D7 松江暖桌船・由志園</text>
+
+          <circle cx="395" cy="136" r="7.5" fill="#4A6B5B"/><text x="395" y="156" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3E3028">D5上午 足立美術館</text>
+
+          <circle cx="470" cy="105" r="13" fill="#C85A32" stroke="#FFFDF9" stroke-width="3"/>
+          <text x="470" y="82" text-anchor="middle" font-size="13" font-weight="900" fill="#C85A32">✈️ 米子機場 / 境港 (中心)</text>
+          <text x="470" y="132" text-anchor="middle" font-size="11" font-weight="700" fill="#3E3028">D1・D4・D7住米子｜D8境港吃蟹返台</text>
+
+          <circle cx="575" cy="136" r="8.5" fill="#C85A32"/><text x="575" y="159" text-anchor="middle" font-size="12" font-weight="700" fill="#3E3028">D4 大山雪道・豪圓湯院・花回廊</text>
+
+          <circle cx="715" cy="142" r="8.5" fill="#C85A32"/><text x="715" y="165" text-anchor="middle" font-size="12" font-weight="700" fill="#3E3028">D3 倉吉白壁・柯南小鎮</text>
+          <text x="715" y="181" text-anchor="middle" font-size="10.5" fill="#C85A32">(住 羽合望湖樓 或 三朝溫泉 ♨️)</text>
+
+          <circle cx="855" cy="80" r="9.5" fill="#C85A32"/><text x="845" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#3E3028">D2 鳥取砂丘・賀露市場・萬葉牛</text>
+          <text x="845" y="106" text-anchor="middle" font-size="10.5" fill="#6E5D53">(距米子 1h40m｜住鳥取站前)</text>
+        </svg>
+      </div>
+
+      <div class="grid-3" style="margin-top: 10px; flex: 0 0 auto;" data-lock-style="true">
+        <div class="paper-card" style="padding: 12px 13px; gap: 6px;">
+          <h3 style="font-size: clamp(14px, 1.22vw, 17.5px);"><span>🛡️ 避開週二公休（02/16 二）</span></h3>
+          <p style="font-size:12.5px; color:var(--hojicha-muted); line-height:1.58;">
+            <span style="display:block; white-space:nowrap;">• <strong>砂丘布丁</strong>（週二三休）➔ 排 <strong>D2 週六</strong></span>
+            <span style="display:block; white-space:nowrap;">• <strong>鳥取花回廊</strong>（週二休）➔ 排 <strong>D4 週一</strong></span>
+            <span style="display:block; white-space:nowrap; letter-spacing:-0.35px;">• <strong>境港直賣中心</strong>（週二休）➔ 排 <strong>D8 週五</strong></span>
+          </p>
+        </div>
+        <div class="paper-card" style="padding: 12px 15px; gap: 6px;">
+          <h3 style="font-size: clamp(14px, 1.22vw, 17.5px);"><span>🛡️ 避開週三公休（02/17 三）</span></h3>
+          <p style="font-size:12.5px; color:var(--hojicha-muted); line-height:1.58;">
+            • D6 週三造訪出雲大社時，神門通「砂屋」與「荒木屋」週三定休，當天直接鎖定免撲空的百年名店<strong>「田中屋」或「看雲樓」</strong>！
+          </p>
+        </div>
+        <div class="paper-card" style="padding: 12px 15px; gap: 6px;">
+          <h3 style="font-size: clamp(14px, 1.22vw, 17.5px);"><span>♨️ 住宿節奏（2奢華＋5高CP值）</span></h3>
+          <p style="font-size:12.5px; color:var(--hojicha-muted); line-height:1.58;">
+            • <strong>D3 羽合/三朝</strong>＋<strong>D5 玉造長樂園</strong> 享頂級一泊二食；其餘 5 晚住市區附天然/人工溫泉商務飯店，兼顧預算與晚餐自由！
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: DAY 1 ==================== -->
+    <section class="slide" data-nav="D1" data-title="Day 1 (02/12 五)｜直飛米子・進駐山陰中心基地" data-sub="桃園直飛米子鬼太郎機場，取車20分鐘進駐米子站前泡湯吃晚餐">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 01 ｜ 2027.02.12 (五) ・ 鳥取縣西部（米子市）</span>
+          <span class="mag-meta-badge">🚗 今日自駕：米子機場 ➔ 米子站前（約 20 分鐘）</span>
+        </div>
+        <h1>直飛米子鬼太郎機場・夜宿米子站前溫暖湯宿</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge">13:30 – 16:50</span>
+            <div class="time-body">
+              <strong>台灣虎航 IT 724｜桃園 (TPE) 直飛 米子鬼太郎機場 (YGJ)</strong>
+              <div class="time-desc">飛行時間僅 2 小時 20 分鐘，輕鬆抵達充滿《鬼太郎》彩繪玻璃與妖怪裝飾的山陰門戶機場。</div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">17:15 – 17:45</span>
+            <div class="time-body">
+              <strong>米子機場租車櫃台取車（檢查 4WD、雪胎胎紋與除雪刷）</strong>
+              <div class="time-desc">出關即達租車櫃台。確認車內備有長柄除雪刷（Snow Brush），設定導航前往米子站前飯店。</div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">18:10 – 20:30</span>
+            <div class="time-body">
+              <strong>入住 Green Rich Hotel 米子站前 ＆ 站前商店街晚餐</strong>
+              <div class="time-desc">停妥飯店特約停車場後，步行至米子站前享用鳥取名物「大山雞燒鳥」或松葉蟹居酒屋，並於超市採買補給品。</div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">21:00 – 23:00</span>
+            <div class="time-body">
+              <strong>館內二股碳酸鈣人工溫泉大浴場泡湯休息</strong>
+              <div class="time-desc">洗去搭機疲勞，養精蓄銳準備隔天一早往東直奔鳥取砂丘！</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🏨 Green Rich Hotel 米子站前</h4>
+              <span class="postcard-stamp">STAY 01</span>
+            </div>
+            <p>位於 JR 米子站步行 3 分鐘處，距離米子機場僅 20 分鐘車程。館內附設男女別「二股碳酸鈣人工溫泉大浴場」與三溫暖烤箱。</p>
+            <div class="tag-row">
+              <span class="tag-pill tag-onsen">♨️ 人工溫泉大浴場</span>
+              <span class="tag-pill tag-sight">🅿️ 附特約停車場</span>
+              <a class="ext-link" href="https://maps.google.com/?q=グリーンリッチホテル米子駅前" target="_blank">📍 地圖</a>
+              <a class="ext-link" href="https://greenrichhotels.jp/yonago/" target="_blank">🔗 官網</a>
+            </div>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>💡 為什麼首晚不住溫泉旅館？</h4>
+              <span class="postcard-stamp">WHY YONAGO?</span>
+            </div>
+            <p>航班 16:50 落地，取完車約 17:40 天色已全黑。冬季雪夜不適合開陌生山路，且傳統一泊二食旅館最晚需於 18:30 前開動晚餐；住米子站前最從容划算！</p>
+          </div>
+
+          <div class="note-banner green">
+            🛒 <strong>Day 1 超市補給任務</strong>：買齊暖暖包、飲用水、車上點心，並準備好 Day 6 稻佐之濱裝海沙用的<strong>小夾鏈袋</strong>。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 5: DAY 2 ==================== -->
+    <section class="slide" data-nav="D2" data-title="Day 2 (02/13 六)｜雪白鳥取砂丘・隈研吾咖啡・賀露市場吃蟹" data-sub="登馬之背賞雪砂丘奇景，吃砂丘布丁、賀露市場松葉蟹與萬葉牛燒肉">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 02 ｜ 2027.02.13 (六) ・ 鳥取縣東部（鳥取砂丘・賀露港）</span>
+          <span class="mag-meta-badge">🚗 今日自駕：米子 ➔ 鳥取砂丘（山陰道約 1h40m）</span>
+        </div>
+        <h1>雪白鳥取砂丘・隈研吾看海咖啡・賀露市場與萬葉牛</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge highlight">09:30 – 11:00</span>
+            <div class="time-body">
+              <strong>鳥取砂丘（登頂 47m「馬之背」賞冬季限定雪白砂丘）</strong>
+              <div class="time-desc">日本最大海岸砂丘！冬季降雪時金黃沙丘覆上純白積雪，與湛藍日本海交織出異世界絕景。（天氣晴朗可往東 15 分鐘順遊<strong>浦富海岸</strong>展望所）</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=鳥取砂丘" target="_blank">📍 鳥取砂丘</a>
+                <a class="ext-link" href="https://maps.google.com/?q=浦富海岸" target="_blank">📍 浦富海岸</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">11:00 – 12:10</span>
+            <div class="time-body">
+              <strong>TAKAHAMA CAFE（高濱咖啡廳）＆ Totto PURIN 砂丘布丁</strong>
+              <div class="time-desc">走進建築大師<strong>隈研吾</strong>設計的智頭杉木造咖啡廳喝熱拿鐵與二十世紀梨奶昔；再到斜對面買週六 10:00 開門的招牌「焦糖粉末砂丘布丁」！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=タカハマカフェ" target="_blank">📍 高濱咖啡</a>
+                <a class="ext-link" href="https://takahamacafe.com/" target="_blank">🔗 官網</a>
+                <a class="ext-link" href="https://maps.google.com/?q=Totto+PURIN" target="_blank">📍 砂丘布丁</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">12:30 – 14:30</span>
+            <div class="time-body">
+              <strong>午餐：鳥取港海鮮市場 KAROICHI（賀露市場，車程 15 分鐘）</strong>
+              <div class="time-desc">必吃冬季當令<strong>松葉蟹定食</strong>、鳥取獨有超甜深海蝦<strong>「猛者蝦（モサエビ）」</strong>與澎湃海鮮丼（推薦：海陽亭／賀露幸／若林）。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=鳥取港海鮮市場かろいち" target="_blank">📍 賀露市場</a>
+                <a class="ext-link" href="https://karoichi.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">18:00 晚餐</span>
+            <div class="time-body">
+              <strong>晚餐：燒肉牛王 鳥取站北口店 或 牛骨拉麵 藤喜</strong>
+              <div class="time-desc">入住鳥取站前飯店後，步行去吃油酸 55% 以上入口即化的<strong>「鳥取和牛オレイン55（萬葉牛）」＋特製牛骨拉麵</strong>！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=焼肉牛王+鳥取駅前店" target="_blank">📍 燒肉牛王</a>
+                <a class="ext-link" href="https://yakiniku-gyuoh.com/" target="_blank">🔗 預約官網</a>
+                <a class="ext-link" href="https://maps.google.com/?q=Japanese+TOTTORI+Noodle+藤喜" target="_blank">📍 藤喜拉麵</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>⚠️ 砂丘暴風雪穿搭與休館避雷</h4>
+              <span class="postcard-stamp">WINTER TIP</span>
+            </div>
+            <p>1. <strong>嚴禁撐傘</strong>：冬季實拍影片驗證，砂丘海風夾帶橫向暴雪時雨傘必斷，請穿<strong>連帽防水防風外套＋高筒防水靴</strong>（砂丘會館亦可租借長靴）。<br>
+            2. <strong>砂之美術館休館中</strong>：每年 1月上旬～4月中旬因換展全館休館，無須排入。</p>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🏨 鳥取站前商務飯店群</h4>
+              <span class="postcard-stamp">STAY 02</span>
+            </div>
+            <p>• <strong>Super Hotel 鳥取站北口</strong>：附天然溫泉「因幡之湯」、免費早餐與晚間免費酒水吧。<br>
+            • <strong>Green Rich Hotel 鳥取站前</strong>：空間寬敞、附人工溫泉大浴場。<br>兩間皆距燒肉牛王步行僅 2 分鐘！</p>
+            <div class="tag-row">
+              <a class="ext-link" href="https://maps.google.com/?q=スーパーホテル鳥取駅北口" target="_blank">📍 Super Hotel</a>
+              <a class="ext-link" href="https://maps.google.com/?q=グリーンリッチホテル鳥取駅前" target="_blank">📍 Green Rich</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 6: DAY 3 ==================== -->
+    <section class="slide" data-nav="D3" data-title="Day 3 (02/14 日)｜白兔神社・倉吉白壁老街・柯南小鎮" data-sub="因幡白兔結緣海岸、江戶白壁赤瓦倉庫散策、青山剛昌故鄉館解謎">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 03 ｜ 2027.02.14 (日) ・ 鳥取縣中部（倉吉・北榮町）</span>
+          <span class="mag-meta-badge">🚗 今日自駕：鳥取市 ➔ 白兔 ➔ 倉吉 ➔ 北榮町（總車程約 1 小時）</span>
+        </div>
+        <h1>因幡白兔結緣・倉吉白壁赤瓦老街・北榮町柯南小鎮</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge">09:30 – 10:45</span>
+            <div class="time-body">
+              <strong>白兔神社 ＆ 白兔海岸（神話戀愛結緣聖地）</strong>
+              <div class="time-desc">《古事記》因幡之白兔神話舞台！參道石燈籠上坐滿可愛的白兔石雕（冬天覆雪超萌），可買白色「結緣石」拋上鳥居祈願，並上天橋俯瞰白兔海岸雪浪。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=白兎神社" target="_blank">📍 白兔神社</a>
+                <a class="ext-link" href="https://hakutojinja.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">11:30 – 13:45</span>
+            <div class="time-body">
+              <strong>倉吉白壁土藏群（赤瓦老街散策 ＆ 石臼咖啡午茶）</strong>
+              <div class="time-desc">沿著玉川清澈水渠與小石橋並立的江戶、明治時期「白壁赤瓦」傳統倉庫群。推薦體驗：古民家<strong>「久樂」</strong>用石臼現磨紅豆配石臼咖啡、<strong>「桑田醬油」</strong>吃醬油霜淇淋。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=倉吉白壁土蔵群" target="_blank">📍 倉吉白壁土藏群</a>
+                <a class="ext-link" href="https://www.kurayoshi-kankou.jp/" target="_blank">🔗 倉吉觀光官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">14:05 – 16:10</span>
+            <div class="time-body">
+              <strong>北榮町柯南小鎮 ＆ 青山剛昌故鄉館（全室內溫暖展館）</strong>
+              <div class="time-desc">自駕定點停靠<strong>「JR由良站 ➔ 柯南大橋 ➔ 米花商店街（按工藤新一之家門鈴、白羅咖啡廳）➔ 青山剛昌故鄉館」</strong>，免去在寒風中徒步 1.4 公里！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=青山剛昌ふるさと館" target="_blank">📍 青山剛昌故鄉館</a>
+                <a class="ext-link" href="https://www.gamf.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">16:30 入住</span>
+            <div class="time-body">
+              <strong>入住鳥取中部頂級溫泉旅館（車程 15 分鐘，詳見下一頁對決！）</strong>
+              <div class="time-desc">候選 A：<strong>羽合溫泉 望湖樓</strong>（東鄉湖上露天風呂）｜候選 B：<strong>三朝溫泉</strong>（世界級含氡鐳溫泉老街）。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🍵 倉吉老街的慢活時光</h4>
+              <span class="postcard-stamp">KURAYOSHI</span>
+            </div>
+            <p>玉川上的單塊石板小橋與白色灰泥牆、黑色焼き杉牆面在冬日薄雪中宛如時光倒流。距離老街車程 3 分鐘還有日本最古老圓形校舍改建的「圓形劇場倉吉模型博物館」。</p>
+            <div class="tag-row">
+              <span class="tag-pill tag-food">☕ 久樂石臼咖啡</span>
+              <span class="tag-pill tag-food">🍦 桑田醬油霜淇淋</span>
+            </div>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🕵️ 自駕逛柯南小鎮不吹風秘訣</h4>
+              <span class="postcard-stamp">CONAN TOWN</span>
+            </div>
+            <p>冬天由良海風較冷，開車可先停「由良站」拍車站與觀光案內所 ➔ 開 3 分鐘停「米花商店街免費停車場」拍柯南大橋與按新一門鈴 ➔ 開 2 分鐘停「故鄉館免費停車場」進室內玩解謎！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 7: 決策專頁 (羽合 vs 三朝) ==================== -->
+    <section class="slide" data-nav="溫泉對決" data-title="Day 3 溫泉宿對決：羽合溫泉望湖樓 vs. 三朝溫泉" data-sub="車程皆距倉吉老街僅 15 分鐘！湖上露天風呂與昭和鐳溫泉老街二選一">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DECISION BOARD ｜ DAY 03 ONSEN RYOKAN SELECTION</span>
+          <span class="mag-meta-badge">💡 點擊下方卡片按鈕可標記目前偏好方案</span>
+        </div>
+        <h1>旅伴決策專頁｜Day 3 鳥取中部溫泉名宿二選一</h1>
+      </div>
+
+      <div class="grid-2">
+        <div class="paper-card" id="cardHawai">
+          <h3>
+            <span>🌊 方案 A：羽合溫泉 望湖樓（東鄉湖畔）</span>
+            <span class="tag-pill tag-onsen">唯一湖上露天風呂</span>
+          </h3>
+          <ul>
+            <li><strong>視覺震撼度滿分</strong>：走過朱紅木棧橋，直接進入建在東鄉湖水面上的男女別<strong>「湖上露天風呂」</strong>，冬季泡在熱湯裡享受 360 度雪景湖面。</li>
+            <li><strong>趣味體驗</strong>：棧橋入口設有免費湖上足湯與高溫源泉池，房客可拿生雞蛋體驗<strong>「邊泡腳邊自己煮溫泉蛋」</strong>。</li>
+            <li><strong>一泊二食</strong>：主打冬季鳥取松葉蟹全席會席料理或鳥取和牛方案，湖景和室視野極為開闊。</li>
+            <li><strong>地理位置</strong>：距倉吉白壁土藏群 12 分鐘、距柯南小鎮 <span class="nw">15 分鐘。</span></li>
+          </ul>
+          <div class="tag-row">
+            <a class="ext-link" href="https://maps.google.com/?q=はわい温泉+望湖楼" target="_blank">📍 Google Maps</a>
+            <a class="ext-link" href="https://www.bokoro.com/" target="_blank">🔗 望湖樓官網</a>
+          </div>
+          <button class="vote-btn" id="btnHawai" onclick="selectOnsen('hawai')">🤍 選擇「方案 A：羽合溫泉 望湖樓」</button>
+        </div>
+
+        <div class="paper-card" id="cardMisasa">
+          <h3>
+            <span>♨️ 方案 B：三朝溫泉（大橋 / 岩崎 / 三朝館）</span>
+            <span class="tag-pill tag-onsen">世界級含氡鐳溫泉</span>
+          </h3>
+          <ul>
+            <li><strong>千年療養神湯</strong>：開湯 850 年，擁有世界屈指可數高濃度<strong>「含氡弱放射能泉（鐳溫泉）」</strong>，傳說泡完三個早上（三朝）百病全消。</li>
+            <li><strong>昭和復古溫泉老街</strong>：沿三朝川展開的溫泉本通保有木造射靶店、飲泉場、三朝橋與河床上的「河原風呂足湯」，<strong>冬季雪夜穿浴衣散步氣氛極佳</strong>！</li>
+            <li><strong>三大代表名宿</strong>：<br>
+              • <strong>旅館大橋</strong>：全館國家有形文化財木造建築＋現代名工松葉蟹懷石<br>
+              • <strong>依山樓岩崎</strong>：皇室下榻名園 12 湯池｜<strong>三朝館</strong>：千坪日本庭園風呂</li>
+          </ul>
+          <div class="tag-row">
+            <a class="ext-link" href="https://maps.google.com/?q=三朝温泉" target="_blank">📍 Google Maps</a>
+            <a class="ext-link" href="https://spa-misasa.jp/" target="_blank">🔗 三朝溫泉官網</a>
+          </div>
+          <button class="vote-btn" id="btnMisasa" onclick="selectOnsen('misasa')">🤍 選擇「方案 B：三朝溫泉老街名宿」</button>
+        </div>
+      </div>
+
+      <div class="note-banner green" style="margin-top: 10px;">
+        ✨ <strong>小貪心折衷玩法</strong>：因為兩處相距僅 20 分鐘車程，也可以下午先去<strong>三朝溫泉老街散步＋泡免費河原足湯</strong>，傍晚再開 20 分鐘去住<strong>羽合溫泉望湖樓</strong>（或反過來）！
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 8: DAY 4 ==================== -->
+    <section class="slide" data-nav="D4" data-title="Day 4 (02/15 一)｜伯耆富士大山・豪圓湯院・鳥取花回廊" data-sub="千年巨杉雪之參道、海景滑雪坡、神之湯豪圓豆腐、花回廊拍冠雪大山">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 04 ｜ 2027.02.15 (一) ・ 鳥取縣西部（大山山麓・南部町）</span>
+          <span class="mag-meta-badge">🚗 今日自駕：鳥取中部 ➔ 大山博勞座 ➔ 花回廊 ➔ 米子</span>
+        </div>
+        <h1>伯耆富士大山雪道・豪圓湯院豆腐・鳥取花回廊</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge highlight">09:30 – 12:00</span>
+            <div class="time-body">
+              <strong>大山寺 ＆ 大神山神社奧宮 ＆ 大山白色度假村</strong>
+              <div class="time-desc">走北側除雪完善的主幹道直達「大山博勞座停車場」。踏上積雪深達 1～2 公尺的 700m 千年巨杉參道參拜「大神山神社奧宮」；並於「豪圓山狼煙台」眺望將日本海盡收眼底的<strong>海景雪坡</strong>！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=大神山神社奥宮" target="_blank">📍 大神山神社奧宮</a>
+                <a class="ext-link" href="https://maps.google.com/?q=だいせんホワイトリゾート" target="_blank">📍 白色度假村</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">12:15 – 14:00</span>
+            <div class="time-body">
+              <strong>午餐 ＆ 日歸溫泉：豪圓湯院（神之湯 ＆ 豪圓豆腐）</strong>
+              <div class="time-desc">就在大山寺參道中段！走進洞窟風內湯與雪景露天風呂泡湯暖身（¥600），再到 1 樓食堂大啖大山天然伏流水自製的<strong>「豪圓湯豆腐定食」與濃郁豆乳霜淇淋</strong>。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=豪円湯院" target="_blank">📍 豪圓湯院</a>
+                <a class="ext-link" href="https://www.gouenyuin.com/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">14:30 – 16:30</span>
+            <div class="time-body">
+              <strong>鳥取花回廊（排在週一，完美避開冬季週二休園！）</strong>
+              <div class="time-desc">漫步 1 公里有頂展望回廊與 20°C 恆溫巨型玻璃溫室賞蘭花，並從回廊西側正面拍攝毫無遮蔽的<strong>「冠雪伯耆富士大山」</strong>震撼全景。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=とっとり花回廊" target="_blank">📍 鳥取花回廊</a>
+                <a class="ext-link" href="https://www.tottorihanakairou.or.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">17:30 入住</span>
+            <div class="time-body">
+              <strong>返回米子市區住宿：Green Rich Hotel 米子站前（或皆生溫泉）</strong>
+              <div class="time-desc">車程 25 分鐘回到米子市區，晚餐可品嚐米子牛骨拉麵或漁港迴轉壽司。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🏔️ 大山冬季自駕與裝備必讀</h4>
+              <span class="postcard-stamp">DAISEN SNOW</span>
+            </div>
+            <p>1. <strong>走北側縣道 24/158 號</strong>：大山南側的「鍵掛峠（大山環狀道路）」與「大山牧場牛奶之鄉」於 12～3 月冬季封路/休業，切勿導航前往南側！<br>
+            2. <strong>高筒雪靴必備</strong>：通往大神山神社奧宮的 700m 參道積雪極厚，務必穿高筒防水防滑雪靴。</p>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🌺 鳥取花回廊 2 月營業提醒</h4>
+              <span class="postcard-stamp">TIMING TIP</span>
+            </div>
+            <p>花回廊的「冬季夜間點燈」於每年 1 月中旬即結束；2 月期間僅白天營業（<strong>09:00–16:30，最後入園 16:00</strong>，每週二公休），因此排在 Day 4（週一）下午 14:30 入園剛剛好！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 9: DAY 5 ==================== -->
+    <section class="slide" data-nav="D5" data-title="Day 5 (02/16 二)｜足立美術館・八重垣占卜・玉造溫泉" data-sub="室內隔窗賞日本第一雪景枯山水、鏡之池硬幣占卜、宍道湖夕陽、120坪混浴龍宮湯">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 05 ｜ 2027.02.16 (二) ・ 跨入島根縣（安來・松江・玉造溫泉）</span>
+          <span class="mag-meta-badge">🚗 今日自駕：米子 ➔ 足立美術館 (25m) ➔ 八重垣 (35m) ➔ 玉造 (15m)</span>
+        </div>
+        <h1>日本第一庭園足立美術館・鏡之池占卜・玉造溫泉</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge highlight">09:30 – 12:30</span>
+            <div class="time-body">
+              <strong>足立美術館（蟬聯 20 餘年「日本第一庭園」・米其林三星）</strong>
+              <div class="time-desc"><strong>冬季最強景點</strong>：全程在溫暖室內透過大面積落地窗（「生之額繪」）欣賞 5 萬坪枯山水庭與白砂青松庭！2月積雪時宛如活生生的水墨畫，還可在館內茶室邊喝咖啡邊賞雪與橫山大觀名畫。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=足立美術館" target="_blank">📍 足立美術館</a>
+                <a class="ext-link" href="https://www.adachi-museum.or.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">14:15 – 15:30</span>
+            <div class="time-body">
+              <strong>八重垣神社（神秘森林「鏡之池」緣分占卜）</strong>
+              <div class="time-desc">須佐之男命與稻田姬命成婚之地。在授與所買 ¥100 占卜和紙，走入後方森林的「鏡之池」，放上 <strong>10圓或100圓硬幣</strong>：15分鐘內沉下代表良緣將至，近岸沉代表緣分在身邊！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=八重垣神社" target="_blank">📍 八重垣神社</a>
+                <a class="ext-link" href="https://yaegakijinja.or.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">16:30 – 17:45</span>
+            <div class="time-body">
+              <strong>宍道湖夕日スポット（日本夕陽百選，2月中旬日落約 17:40）</strong>
+              <div class="time-desc">在湖畔欣賞夕陽沉入嫁島後方的紫金漸層，並摸摸湖岸草坪帶來良緣的「第2隻白兔」青銅像（※週二島根縣立美術館休館，戶外湖畔草坪與「とるぱ」全天免費開放）。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=宍道湖夕日スポット+とるぱ" target="_blank">📍 宍道湖夕日スポット</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">18:00 入住</span>
+            <div class="time-body">
+              <strong>入住千年美肌之湯：玉造溫泉 湯之助之宿 長樂園</strong>
+              <div class="time-desc">換上專用湯浴衣體驗 <strong>120 坪日本最大級混浴大露天風呂「龍宮之湯」</strong> 賞雪泡湯、漫步萬坪夜間點燈庭園，享用島根和牛與松葉蟹會席晚餐！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=玉造温泉+湯之助の宿+長楽園" target="_blank">📍 玉造長樂園</a>
+                <a class="ext-link" href="https://www.choraku.co.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🖼️ 為何足立美術館冬天最棒？</h4>
+              <span class="postcard-stamp">NO.1 GARDEN</span>
+            </div>
+            <p>一般日本庭園冬天在戶外走動會冷得發抖，但足立美術館為了維持庭園一塵不染，所有參觀動線全部設計在溫暖的室內迴廊，隔著擦拭得宛如透明的落地窗賞雪，還能坐在茶室喝熱咖啡正對枯山水！</p>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>♨️ 玉造長樂園（120坪龍宮之湯）</h4>
+              <span class="postcard-stamp">STAY 05</span>
+            </div>
+            <p>西元 733 年《出雲國風土記》記載「一浴容顏端正」的天然化妝水美肌溫泉。長樂園免費提供男女專用泡湯衣（湯あみ着），讓旅伴或家人能一起在 120 坪巨石松林露天大池中泡湯賞雪！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 10: DAY 6 ==================== -->
+    <section class="slide" data-nav="D6" data-title="Day 6 (02/17 三)｜稻佐之濱・出雲大社・日御碕神社與燈塔" data-sub="先去稻佐之濱取海沙、到出雲大社素鵞社換神沙、吃割子蕎麥麵、看日御碕朱紅神社與燈塔">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 06 ｜ 2027.02.17 (三) ・ 島根縣西部（神話之國出雲・日御碕）</span>
+          <span class="mag-meta-badge">🚗 今日自駕：玉造溫泉 ➔ 出雲大社 (45m) ➔ 日御碕 (18m) ➔ 出雲站</span>
+        </div>
+        <h1>稻佐之濱取海沙・出雲大社換神沙・日御碕神社與燈塔</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge highlight">09:30 – 10:00</span>
+            <div class="time-body">
+              <strong>Step 1：稻佐之濱（參拜弁天島鳥居・取海沙）</strong>
+              <div class="time-desc">八百萬神明登陸的神聖海灘！自駕務必先停這裡（免費停車場），在巨岩「弁天島」前參拜後，用<strong>自備的小夾鏈袋</strong>在海浪岸邊取一小把海沙帶去出雲大社。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=稲佐の浜" target="_blank">📍 稻佐之濱</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">10:05 – 12:00</span>
+            <div class="time-body">
+              <strong>Step 2：出雲大社（素鵞社換神沙 ＆ 神樂殿巨型注連繩）</strong>
+              <div class="time-desc">以獨特古禮<strong>「二禮、四拍手、一禮」</strong>參拜；走到御本殿最深處的能量點<strong>「素鵞社」</strong>將稻佐之濱海沙換取護身「神沙」；再到西側<strong>神樂殿</strong>仰望 5.2 公噸日本最大注連繩與數十隻白兔雕像。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=出雲大社" target="_blank">📍 出雲大社</a>
+                <a class="ext-link" href="https://izumooyashiro.or.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">12:00 – 13:45</span>
+            <div class="time-body">
+              <strong>午餐：神門通「出雲蕎麥麵」（田中屋／看雲樓）＆ 善哉紅豆湯</strong>
+              <div class="time-desc">必點三層朱紅漆器<strong>「割子蕎麥麵（冷）」＋冬季暖胃「釜揚蕎麥麵（熱湯）」</strong>！（※2/17 週三「砂屋」與「荒木屋」公休，當日鎖定正門鳥居旁<strong>田中屋</strong>或<strong>看雲樓</strong>！）</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=そば処+田中屋" target="_blank">📍 田中屋</a>
+                <a class="ext-link" href="https://maps.google.com/?q=看雲楼" target="_blank">📍 看雲樓</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">14:00 – 16:00</span>
+            <div class="time-body">
+              <strong>日御碕神社（桃山朱紅社殿）＆ 出雲日御碕純白燈塔</strong>
+              <div class="time-desc">沿海岸往西開車 18 分鐘，欣賞白雪襯托下的鮮豔朱紅桃山時代社殿，並登頂 43.65m 日本最高純白石造燈塔，俯瞰冬季日本海巨浪與柱狀節理斷崖。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=日御碕神社" target="_blank">📍 日御碕神社</a>
+                <a class="ext-link" href="https://hinomisaki-jinja.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>⛩️ 內行必知「出雲換神沙」儀式</h4>
+              <span class="postcard-stamp">SACRED SAND</span>
+            </div>
+            <p>許多遊客直接走進大社後發現別人都在「素鵞社」裝沙卻不能拿——因為規矩是<strong>必須先去「稻佐之濱」取海沙過來交換</strong>！開車只要先繞去 3 分鐘外的稻佐之濱，就能把保佑平安的神沙帶回家。</p>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🏨 Dormy Inn 出雲（八雲之湯）</h4>
+              <span class="postcard-stamp">STAY 06</span>
+            </div>
+            <p>位於 JR 出雲市站南口旁，頂樓 11F 設有天然溫泉露天風呂與三溫暖，泡完湯享免費冰棒、養樂多與 21:30 <strong>免費夜鳴拉麵</strong>，隔天早餐還有割子蕎麥麵與赤天魚餅！</p>
+            <div class="tag-row">
+              <a class="ext-link" href="https://maps.google.com/?q=天然温泉+八雲の湯+ドーミーイン出雲" target="_blank">📍 地圖</a>
+              <a class="ext-link" href="https://dormy-hotels.com/dormyinn/hotels/izumo/" target="_blank">🔗 官網</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 11: DAY 7 ==================== -->
+    <section class="slide" data-nav="D7" data-title="Day 7 (02/18 四)｜國寶松江城・堀川暖桌船・由志園寒牡丹" data-sub="登國寶千鳥城天守、搭冬季被爐暖桌船鑽低橋、大根島賞戴稻草傘的寒牡丹、開上江島大橋">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 07 ｜ 2027.02.18 (四) ・ 水都松江・大根島・跨海返回境港</span>
+          <span class="mag-meta-badge">🚗 今日自駕：出雲 ➔ 松江城 (45m) ➔ 由志園 (25m) ➔ 江島大橋 ➔ 米子</span>
+        </div>
+        <h1>國寶松江城・冬季堀川暖桌船・由志園寒牡丹・江島大橋</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge highlight">09:30 – 12:30</span>
+            <div class="time-body">
+              <strong>國寶松江城 ＆ 興雲閣 ＆ 冬季限定「堀川暖桌船」</strong>
+              <div class="time-desc">登頂日本現存 12 座木造天守之一的「千鳥城」俯瞰松江雪景；到薄荷綠明治洋館「興雲閣」喝咖啡；再搭 50 分鐘<strong>被爐暖桌船</strong>遊護城河，經過 4 座超低古橋時船頂會降下、全船一起趴在暖桌上通過！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=松江城" target="_blank">📍 松江城</a>
+                <a class="ext-link" href="https://www.matsue-castle.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">12:30 – 14:00</span>
+            <div class="time-body">
+              <strong>午餐：松江市區頂級「島根和牛」燒肉 或 宍道湖蜆仔飯</strong>
+              <div class="time-desc">島根和牛曾多次榮獲日本全國和牛能力共進會「內閣總理大臣賞（日本第一）」，推薦於松江市區享用和牛鐵板燒或燒肉午餐。</div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">14:30 – 16:15</span>
+            <div class="time-body">
+              <strong>大根島「由志園」（冬季稻草傘寒牡丹 ＆ 室內牡丹館）</strong>
+              <div class="time-desc">中海中央的萬坪池泉迴遊式日本庭園！2月戶外庭園裡的冬牡丹會戴上可愛防雪稻草小傘（藁ぼっち），室內牡丹館則全年滿開巨型牡丹，還能在「茶房一望」落地窗前喝高麗人參茶。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=由志園" target="_blank">📍 由志園</a>
+                <a class="ext-link" href="https://www.yuushien.com/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">16:25 – 17:30</span>
+            <div class="time-body">
+              <strong>跨越「江島大橋（ベタ踏み坂）」返回米子／境港住宿</strong>
+              <div class="time-desc">從大根島開車 5 分鐘即上江島大橋！先在島根側全家便利商店旁堤防用手機 3x–5x 長焦鏡頭拍出「直衝天際雲霄飛車陡坡」壓縮感，再開車過橋回米子住宿。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=江島大橋" target="_blank">📍 江島大橋</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🛶 冬天最療癒：松江堀川暖桌船</h4>
+              <span class="postcard-stamp">KOTATSU BOAT</span>
+            </div>
+            <p>每年 11月～3月限定！脫鞋走進船艙，把雙腳伸進鋪著厚棉被的豆炭暖桌裡，一邊聽船夫唱民謠、一邊看兩岸白雪武家屋敷與水鳥，完全不怕冷！</p>
+            <div class="tag-row">
+              <span class="tag-pill tag-sight">🧦 松江城脫鞋必穿厚毛襪</span>
+              <span class="tag-pill tag-onsen">🛂 護照享外國人票價折扣</span>
+            </div>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🌺 由志園「寒牡丹（冬牡丹）」</h4>
+              <span class="postcard-stamp">YUUSHIEN</span>
+            </div>
+            <p>職人以手工編織的稻草雪圍（藁ぼっち）替嬌貴的牡丹擋風雪，紅艷花朵在白雪與稻草傘中綻放，是只有 12～2 月才看得到的山陰冬日風物詩。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 12: DAY 8 ==================== -->
+    <section class="slide" data-nav="D8" data-title="Day 8 (02/19 五)｜境港水木茂大道・直賣中心吃蟹・賦歸" data-sub="鬼太郎177尊妖怪銅像集章、2024全新水木茂紀念館、水產直賣中心現拆螃蟹、10分鐘抵米子機場">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">DAY 08 ｜ 2027.02.19 (五) ・ 境港妖怪小鎮・松葉蟹最終章・平安返台</span>
+          <span class="mag-meta-badge">✈️ 15:30 米子機場還車｜17:50 虎航 IT725 起飛 ➔ 20:00 抵桃園</span>
+        </div>
+        <h1>境港水木茂大道・水產直賣中心現拆松葉蟹・米子賦歸</h1>
+      </div>
+
+      <div class="grid-day-layout">
+        <div class="day-timeline">
+          <div class="time-block">
+            <span class="time-badge highlight">09:30 – 12:00</span>
+            <div class="time-body">
+              <strong>境港・水木茂大道 ＆ 妖怪神社 ＆ 全新「水木茂紀念館」</strong>
+              <div class="time-desc">《鬼太郎》作者故鄉！買一本妖怪集章冊沿路收集印章、參拜會旋轉噴水的眼球老爹石球「妖怪神社」、參觀 2024 年 4 月全新翻修開幕的沉浸式「水木茂紀念館」，買逼真眼球老爹和菓子與拍彩繪鬼太郎列車。</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=水木しげるロード" target="_blank">📍 水木茂大道</a>
+                <a class="ext-link" href="https://www.sakaiminato.net/mizuki/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge highlight">12:05 – 13:45</span>
+            <div class="time-body">
+              <strong>午餐：境港水產物直賣中心（現挑現拆整隻松葉蟹盛宴）</strong>
+              <div class="time-desc">境港是日本紅楚蟹與松葉蟹捕撈量第一漁港！在直賣中心以產地批發價挑選剛煮好的<strong>整隻松葉蟹與紅楚蟹</strong>，老闆附剪刀與托盤，直接端到市場內用座位區大快朵頤！</div>
+              <div class="tag-row">
+                <a class="ext-link" href="https://maps.google.com/?q=境港水産物直売センター" target="_blank">📍 境港水產物直賣中心</a>
+                <a class="ext-link" href="https://www.sakaiminato-suisan.jp/" target="_blank">🔗 官網</a>
+              </div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">14:00 – 15:15</span>
+            <div class="time-body">
+              <strong>最後伴手禮採買（境港超市／AEON）＆ 還車前加滿油</strong>
+              <div class="time-desc">採買二十世紀梨果凍、出雲蕎麥麵乾麵、藥妝零食，並在米子機場周邊加油站加滿油（保留收據）。</div>
+            </div>
+          </div>
+          <div class="time-block">
+            <span class="time-badge">15:30 – 20:00</span>
+            <div class="time-body">
+              <strong>15:30 米子鬼太郎機場還車（車程 10 分鐘）➔ 17:50 返台</strong>
+              <div class="time-desc">搭乘台灣虎航 <code>IT 725</code>（17:50 YGJ ➔ 20:00 TPE），滿載松葉蟹與雪景回憶平安返抵台灣！</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="postcard-column">
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🦀 境港直賣所排最後一天的好處</h4>
+              <span class="postcard-stamp">CRAB FINALE</span>
+            </div>
+            <p>1. <strong>完美避開週二公休</strong>：Day 8 為週五，所有水產攤位全開！<br>
+            2. <strong>離米子機場僅 10 分鐘車程</strong>：早上逛鬼太郎街、中午現拆整隻螃蟹吃到飽，下午 15:30 去機場還車完全沒有趕路壓力，為 8 天旅程畫下最奢華句點！</p>
+          </div>
+
+          <div class="postcard">
+            <div class="postcard-head">
+              <h4>🎁 境港＆米子機場必買伴手禮</h4>
+              <span class="postcard-stamp">SOUVENIRS</span>
+            </div>
+            <p>• <strong>妖怪食品研究所</strong>：妖菓目玉おやじ（眼球老爹和菓子）<br>
+            • <strong>境港直賣中心</strong>：螃蟹仙貝、紅楚蟹罐頭、昆布海產<br>
+            • <strong>米子機場免稅店</strong>：二十世紀梨甜點、大江之鄉費南雪、山陰地酒</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 13: 美食圖鑑 ==================== -->
+    <section class="slide" data-nav="美食圖鑑" data-title="山陰冬日味覺圖鑑｜雙蟹・雙和牛・雙靈魂麵食" data-sub="2月中旬松葉蟹最肥美巔峰期！一張表看懂山陰必吃名物">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">CHAPTER 03 ｜ SAN'IN WINTER GASTRONOMY GUIDE</span>
+          <span class="mag-meta-badge">🦀 11月～3月「蟹取縣」冬季限定饗宴</span>
+        </div>
+        <h1>山陰冬日味覺圖鑑｜雙蟹・雙和牛・雙靈魂麵食</h1>
+      </div>
+
+      <div class="grid-3">
+        <div class="paper-card">
+          <h3><span>🦀 冬季雙蟹對決</span><span class="tag-pill tag-food">2月正值巔峰</span></h3>
+          <ul>
+            <li><strong>松葉蟹（成長公楚蟹）</strong><br>漁期 11/6～3/20。2月肉質最緊實飽滿、蟹膏濃郁！推薦在 <strong>Day 3 / Day 5 溫泉旅館會席</strong> 吃活蟹刺身、炭烤蟹腳與蟹壽喜鍋。</li>
+            <li><strong>紅楚蟹（紅ズワイガニ）</strong><br>境港產量日本第一！水分多、甜度極高，價格僅松葉蟹的 1/3～1/2，推薦在 <strong>Day 2 賀露市場</strong> 與 <strong>Day 8 境港直賣中心</strong> 整隻現買現拆！</li>
+            <li><strong>猛者蝦（モサエビ）</strong><br>鳥取獨有深海甜蝦，甜度勝過牡丹蝦，僅限產地直送（Day 2 賀露市場必點）。</li>
+          </ul>
+        </div>
+
+        <div class="paper-card">
+          <h3><span>🥩 雙縣頂級黑毛和牛</span><span class="tag-pill tag-food">入口即化</span></h3>
+          <ul>
+            <li><strong>鳥取和牛「萬葉牛（オレイン55）」</strong><br>油酸（Olein）含量達 55% 以上，脂肪融點極低、入口即化卻清爽不膩。<br>📍 <strong>Day 2 晚餐：燒肉牛王 鳥取站北口店</strong>（記得提前網路預約！）</li>
+            <li><strong>日本第一「島根和牛」</strong><br>多次榮獲全國和牛能力共進會「內閣總理大臣賞」，肉香濃郁迷人。<br>📍 <strong>Day 5 晚餐：玉造長樂園會席</strong> ＆ <strong>Day 7 午餐：松江市區鐵板燒/燒肉</strong></li>
+          </ul>
+        </div>
+
+        <div class="paper-card">
+          <h3><span>🍜 雙縣靈魂麵食＆甜點</span><span class="tag-pill tag-food">冬日暖胃</span></h3>
+          <ul>
+            <li><strong>鳥取牛骨拉麵</strong><br>牛骨慢熬出金黃清澈湯頭，帶有獨特牛脂甘甜與焦香。<br>📍 <strong>牛骨拉麵 藤喜</strong> 或 <strong>燒肉牛王</strong></li>
+            <li><strong>島根出雲蕎麥麵（日本三大蕎麥）</strong><br>連殼研磨香氣濃烈！必點三層<strong>「割子蕎麥麵（冷）」＋「釜揚蕎麥麵（熱湯）」</strong>。<br>📍 <strong>Day 6 神門通：田中屋／看雲樓／砂屋</strong></li>
+            <li><strong>冬日甜點三寶</strong>：<strong>砂丘 Totto 布丁</strong>、<strong>豪圓湯院湯豆腐</strong>、<strong>出雲善哉紅豆湯</strong>。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 14: 預算結構表 (含互動試算) ==================== -->
+    <section class="slide" data-nav="預算表" data-title="8天7夜預估花費與預算結構表" data-sub="機票、4WD雪胎租車、2晚頂級溫泉一泊二食＋5晚溫泉商務飯店、松葉蟹美食預算">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">CHAPTER 04 ｜ ESTIMATED BUDGET BREAKDOWN</span>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span style="font-size:12.5px; font-weight:700;">👥 同行分攤車資人數：</span>
+            <select id="paxSelect" onchange="calcBudget()" style="padding:3px 10px; border-radius:999px; border:1px solid var(--hojicha); background:var(--oatmeal); font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;">
+              <option value="2" selected>2 人同行（2人分攤租車）</option>
+              <option value="3">3 人同行（3人分攤租車）</option>
+              <option value="4">4 人同行（4人分攤租車）</option>
+            </select>
+          </div>
+        </div>
+        <h1>8天7夜預估花費與預算結構表（可切換人數試算）</h1>
+      </div>
+
+      <table class="editorial-table">
+        <thead>
+          <tr>
+            <th style="width:18%">費用類別</th>
+            <th style="width:44%">配置明細說明（2晚奢華溫泉一泊二食 ＋ 5晚高CP值溫泉商務飯店）</th>
+            <th style="width:19%">日幣預估 / 人</th>
+            <th style="width:19%">台幣預估 / 人 (匯率0.22)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>✈️ 國際機票</strong></td>
+            <td>台灣虎航 桃園 ⇄ 米子單點直飛（<code>IT724</code> / <code>IT725</code> tigersmart 含20kg托運與選位）</td>
+            <td>—</td>
+            <td><strong>NT$ 12,163</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🚗 4WD雪胎租車＆油資</strong></td>
+            <td>米子機場同站借還 8 天（4WD + 雪胎 + NOC全險約 ¥76,000 + 油資/停車/過路費約 ¥14,000，總計 ¥90,000 依人數分攤）</td>
+            <td id="carJpy">¥ 45,000</td>
+            <td id="carTwd"><strong>NT$ 9,900</strong></td>
+          </tr>
+          <tr>
+            <td><strong>♨️ 頂級溫泉旅館 (2晚)</strong></td>
+            <td>D3 <strong>羽合望湖樓 或 三朝溫泉</strong>（一泊二食松葉蟹方案約 ¥28,000）＋ D5 <strong>玉造溫泉長樂園</strong>（一泊二食約 ¥30,000）</td>
+            <td>¥ 58,000</td>
+            <td><strong>NT$ 12,760</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🏨 溫泉商務飯店 (5晚)</strong></td>
+            <td>D1/D4/D7 <strong>Green Rich 米子</strong>、D2 <strong>Super Hotel 鳥取</strong>、D6 <strong>Dormy Inn 出雲</strong>（5晚平均每人約 ¥7,000/晚）</td>
+            <td>¥ 35,000</td>
+            <td><strong>NT$ 7,700</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🦀 餐飲與松葉蟹美食</strong></td>
+            <td>賀露市場＆境港直賣中心螃蟹海鮮、燒肉牛王萬葉牛、島根和牛、出雲蕎麥麵、高濱咖啡與砂丘布丁（扣除溫泉旅館已含之餐食）</td>
+            <td>¥ 42,000</td>
+            <td><strong>NT$ 9,240</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🎟️ 門票・日歸湯・雜支</strong></td>
+            <td>足立美術館(¥2,300)、由志園、松江城＋堀川暖桌船、花回廊、柯南故鄉館、水木茂紀念館、豪圓湯院</td>
+            <td>¥ 10,000</td>
+            <td><strong>NT$ 2,200</strong></td>
+          </tr>
+          <tr style="background: var(--oatmeal); font-weight:700;">
+            <td><strong>💰 8天7夜每人總計</strong></td>
+            <td>含直飛機票、全程 4WD 雪胎自駕、2晚名湯一泊二食、5晚溫泉商務飯店、松葉蟹＆雙和牛大餐</td>
+            <td id="totalJpy">¥ 190,000 (+機票)</td>
+            <td id="totalTwd" style="color:var(--kaki); font-size:16.5px;"><strong>約 NT$ 53,963 / 人</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-banner green" style="margin-top: 10px;">
+        💡 <strong>預算彈性調節空間</strong>：若想將總預算壓在 NT$45,000 以內，可將 2 晚頂級溫泉旅館改為 1 晚（只住玉造長樂園或望湖樓其中一晚），即可立省約 <span class="nw">NT$4,500 / 人！</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 15: 互動式行前準備清單 ==================== -->
+    <section class="slide" data-nav="行前清單" data-title="互動式行前準備與預約雷達清單" data-sub="點擊即可打勾（自動儲存於瀏覽器），出發前逐項確認不漏接">
+      <div class="mag-header">
+        <div class="mag-top-row">
+          <span class="mag-kicker">CHAPTER 05 ｜ INTERACTIVE PRE-TRIP CHECKLIST</span>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="mag-meta-badge" id="checkProgress">✅ 完成度：0 / 12</span>
+            <button class="ctrl-btn" style="padding:3px 10px; font-size:11.5px;" onclick="resetChecklist()">重置勾選</button>
+          </div>
+        </div>
+        <h1>互動式行前準備與預約雷達清單（點擊可直接打勾儲存）</h1>
+      </div>
+
+      <div class="grid-3">
+        <div class="paper-card">
+          <h3><span>📅 1. 提前預訂雷達（前3–5個月）</span></h3>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" data-key="c1" onchange="saveCheck(this)"><span><strong>訂妥台灣虎航機票</strong>：02/12 <code>IT724</code> 去、02/19 <code>IT725</code> 回（米子單點進出）</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c2" onchange="saveCheck(this)"><span><strong>預約米子機場租車</strong>：務必指定 <strong>4WD ＋ 雪胎（Studless）＋ NOC全險</strong></span></label>
+            <label class="check-item"><input type="checkbox" data-key="c3" onchange="saveCheck(this)"><span><strong>預訂 Day 3 溫泉宿</strong>：羽合溫泉望湖樓 或 三朝溫泉（春節旺季搶手）</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c4" onchange="saveCheck(this)"><span><strong>預訂 Day 5 溫泉宿</strong>：玉造溫泉 湯之助之宿 長樂園（120坪龍宮之湯）</span></label>
+          </div>
+        </div>
+
+        <div class="paper-card">
+          <h3><span>🍽️ 2. 市區飯店與餐廳（前1–2個月）</span></h3>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" data-key="c5" onchange="saveCheck(this)"><span><strong>預訂 5 晚市區飯店</strong>：Green Rich 米子(D1/4/7)、鳥取站前(D2)、Dormy Inn 出雲(D6)</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c6" onchange="saveCheck(this)"><span><strong>預約 Day 2 晚餐</strong>：燒肉牛王 鳥取站北口店（官網線上訂位吃萬葉牛）</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c7" onchange="saveCheck(this)"><span><strong>辦理台灣駕照日文譯本</strong>：攜帶台灣駕照正本＋日文譯本＋護照取車</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c8" onchange="saveCheck(this)"><span><strong>填寫 Visit Japan Web</strong>：完成入境審查與海關申報 QR Code</span></label>
+          </div>
+        </div>
+
+        <div class="paper-card">
+          <h3><span>🎒 3. 二月雪季穿搭與隨身法寶</span></h3>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" data-key="c9" onchange="saveCheck(this)"><span><strong>連帽防風防水外套＋高筒防水雪靴</strong>（砂丘與海邊強風暴雪禁撐雨傘！）</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c10" onchange="saveCheck(this)"><span><strong>厚毛襪 2–3 雙</strong>（登國寶松江城天守與日御碕燈塔脫鞋必備，木地板極冰）</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c11" onchange="saveCheck(this)"><span><strong>小夾鏈袋 2 個 ＋ 小湯匙</strong>（Day 6 稻佐之濱取海沙去出雲大社素鵞社換神沙）</span></label>
+            <label class="check-item"><input type="checkbox" data-key="c12" onchange="saveCheck(this)"><span><strong>10圓/100圓日幣硬幣 ＋ 全員護照隨身帶</strong>（八重垣鏡之池占卜＆由志園外國人優惠）</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </main>
+
+  <!-- 底部控制列 -->
+  <footer class="bottom-bar">
+    <div>📖 <strong>操作提示</strong>：鍵盤 <code>←</code> <code>→</code> 或 <code>空白鍵</code> 翻頁｜按 <code>O</code> 開啟縮圖總覽｜按 <code>F</code> 全螢幕｜按 <code>Ctrl+P</code> 匯出 PDF 手冊</div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn" onclick="prevSlide()">◀ 上一頁</button>
+      <span id="pageIndicator" style="min-width: 64px; text-align:center; font-weight:700;">1 / 15</span>
+      <button class="ctrl-btn" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="ctrl-btn" onclick="toggleFullScreen()">⛶ 全螢幕</button>
+    </div>
+  </footer>
+
+  <!-- 縮圖總覽 Modal -->
+  <div class="overview-modal" id="overviewModal">
+    <div class="overview-header">
+      <h2 style="font-family:'Noto Serif TC',serif;">☷ 簡報章節縮圖總覽（點擊卡片直接跳轉）</h2>
+      <button class="ctrl-btn" onclick="toggleOverview()">✕ 關閉 (Esc)</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const navPillsContainer = document.getElementById('navPills');
+    const pageIndicator = document.getElementById('pageIndicator');
+    const progressFill = document.getElementById('progressFill');
+    const overviewModal = document.getElementById('overviewModal');
+    const overviewGrid = document.getElementById('overviewGrid');
+    let currentIdx = 0;
+
+    slides.forEach((slide, idx) => {
+      const navLabel = slide.dataset.nav || `P${idx + 1}`;
+      const pill = document.createElement('button');
+      pill.className = 'nav-pill';
+      pill.textContent = navLabel;
+      pill.onclick = () => goToSlide(idx);
+      navPillsContainer.appendChild(pill);
+
+      const ovCard = document.createElement('div');
+      ovCard.className = 'ov-card';
+      ovCard.innerHTML = `
+        <div class="ov-num">SLIDE ${String(idx + 1).padStart(2, '0')} — ${navLabel}</div>
+        <div class="ov-title">${slide.dataset.title || ''}</div>
+        <div class="ov-sub">${slide.dataset.sub || ''}</div>
+      `;
+      ovCard.onclick = () => {
+        goToSlide(idx);
+        toggleOverview(false);
+      };
+      overviewGrid.appendChild(ovCard);
+    });
+
+    function hasOrphanVisualLine(el) {
+      const range = document.createRange();
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      const lines = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        const text = node.nodeValue;
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          if (/\s/.test(ch)) continue;
+          range.setStart(node, i);
+          range.setEnd(node, i + 1);
+          const rect = range.getBoundingClientRect();
+          if (rect.width === 0 && rect.height === 0) continue;
+          const midY = (rect.top + rect.bottom) / 2;
+          let line = lines.find(l => Math.abs(l.y - midY) < 8);
+          if (!line) {
+            line = { y: midY, chars: '' };
+            lines.push(line);
+          }
+          line.chars += ch;
+        }
+      }
+      if (lines.length <= 1) return false;
+      lines.sort((a, b) => a.y - b.y);
+      for (let i = 1; i < lines.length; i++) {
+        // Strip trailing punctuation to count actual words/characters, or check total length <= 3
+        const rawLen = lines[i].chars.length;
+        const coreLen = lines[i].chars.replace(/[，。！？、；：「」『』（）()!\.\?]/g, '').length;
+        if (rawLen <= 3 || coreLen <= 2) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function fixSlideTypography(slide) {
+      if (!slide) return;
+      // 1. 確保所有單行標題在窄螢幕下自動微幅縮字、絕不截斷或換行
+      const singleLineEls = slide.querySelectorAll('.mag-header h1, .paper-card h3, .postcard-head h4, .time-body > strong');
+      singleLineEls.forEach(el => {
+        if (el.closest('[data-lock-style="true"]')) return;
+        el.style.fontSize = '';
+        el.style.letterSpacing = '';
+        if (el.scrollWidth > el.clientWidth + 2) {
+          const ratio = Math.max(0.82, (el.clientWidth - 4) / el.scrollWidth);
+          const computed = parseFloat(window.getComputedStyle(el).fontSize);
+          el.style.fontSize = `${(computed * ratio).toFixed(2)}px`;
+        }
+      });
+
+      // 2. 掃描頁內所有段落與條列，若任一行僅剩 1～2 個字（含標點 <=3 字），自動微調字距與字級將孤字合併回上一行
+      const textBlocks = slide.querySelectorAll('.time-desc, .postcard p, .paper-card p, .paper-card li, .note-banner, .check-item span, table.editorial-table td');
+      const candidates = [
+        { ls: '-0.015em', fs: 1.0 },
+        { ls: '-0.03em',  fs: 1.0 },
+        { ls: '-0.045em', fs: 1.0 },
+        { ls: '-0.03em',  fs: 0.975 },
+        { ls: '-0.04em',  fs: 0.955 },
+        { ls: '-0.045em', fs: 0.935 },
+        { ls: '-0.05em',  fs: 0.915 }
+      ];
+      textBlocks.forEach(el => {
+        if (el.closest('[data-lock-style="true"]')) return;
+        el.style.letterSpacing = '';
+        el.style.fontSize = '';
+        if (!hasOrphanVisualLine(el)) return;
+        const baseFs = parseFloat(window.getComputedStyle(el).fontSize);
+        for (const step of candidates) {
+          el.style.letterSpacing = step.ls;
+          el.style.fontSize = `${(baseFs * step.fs).toFixed(2)}px`;
+          if (!hasOrphanVisualLine(el)) break;
+        }
+      });
+    }
+
+    function goToSlide(idx) {
+      if (idx < 0 || idx >= slides.length) return;
+      currentIdx = idx;
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      Array.from(navPillsContainer.children).forEach((p, i) => p.classList.toggle('active', i === idx));
+      Array.from(overviewGrid.children).forEach((c, i) => c.classList.toggle('current', i === idx));
+      pageIndicator.textContent = `${idx + 1} / ${slides.length}`;
+      progressFill.style.width = `${((idx + 1) / slides.length) * 100}%`;
+      fixSlideTypography(slides[idx]);
+    }
+
+    window.addEventListener('resize', () => fixSlideTypography(slides[currentIdx]));
+    window.addEventListener('beforeprint', () => slides.forEach(s => fixSlideTypography(s)));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => fixSlideTypography(slides[currentIdx]));
+    }
+
+    function nextSlide() { goToSlide(currentIdx + 1); }
+    function prevSlide() { goToSlide(currentIdx - 1); }
+
+    function toggleOverview(forceState) {
+      const isOpen = typeof forceState === 'boolean' ? forceState : !overviewModal.classList.contains('open');
+      overviewModal.classList.toggle('open', isOpen);
+    }
+
+    function toggleFullScreen() {
+      const stage = document.getElementById('deckStage');
+      if (!document.fullscreenElement) {
+        stage.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overviewModal.classList.contains('open')) {
+        toggleOverview(false);
+        return;
+      }
+      if (overviewModal.classList.contains('open')) return;
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'o' || e.key === 'O') {
+        toggleOverview();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    function selectOnsen(choice) {
+      localStorage.setItem('sanin_day3_onsen', choice);
+      renderOnsenChoice();
+    }
+    function renderOnsenChoice() {
+      const saved = localStorage.getItem('sanin_day3_onsen');
+      const btnH = document.getElementById('btnHawai');
+      const btnM = document.getElementById('btnMisasa');
+      if (!btnH || !btnM) return;
+      btnH.classList.toggle('selected', saved === 'hawai');
+      btnH.textContent = saved === 'hawai' ? '❤️ 已鎖定「方案 A：羽合溫泉 望湖樓」' : '🤍 選擇「方案 A：羽合溫泉 望湖樓」';
+      btnM.classList.toggle('selected', saved === 'misasa');
+      btnM.textContent = saved === 'misasa' ? '❤️ 已鎖定「方案 B：三朝溫泉老街名宿」' : '🤍 選擇「方案 B：三朝溫泉老街名宿」';
+    }
+
+    function calcBudget() {
+      const pax = parseInt(document.getElementById('paxSelect').value, 10) || 2;
+      const totalCarJpy = 90000;
+      const carPerPaxJpy = Math.round(totalCarJpy / pax);
+      const carPerPaxTwd = Math.round(carPerPaxJpy * 0.22);
+      const otherJpy = 58000 + 35000 + 42000 + 10000;
+      const totalJpy = carPerPaxJpy + otherJpy;
+      const totalTwd = 12163 + Math.round(totalJpy * 0.22);
+
+      document.getElementById('carJpy').textContent = `¥ ${carPerPaxJpy.toLocaleString()}`;
+      document.getElementById('carTwd').innerHTML = `<strong>NT$ ${carPerPaxTwd.toLocaleString()}</strong>`;
+      document.getElementById('totalJpy').textContent = `¥ ${totalJpy.toLocaleString()} (+機票)`;
+      document.getElementById('totalTwd').innerHTML = `<strong>約 NT$ ${totalTwd.toLocaleString()} / 人</strong>`;
+    }
+
+    function saveCheck(el) {
+      const key = 'sanin_chk_' + el.dataset.key;
+      localStorage.setItem(key, el.checked ? '1' : '0');
+      el.closest('.check-item').classList.toggle('done', el.checked);
+      updateCheckProgress();
+    }
+    function loadChecks() {
+      document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+        const val = localStorage.getItem('sanin_chk_' + cb.dataset.key);
+        cb.checked = val === '1';
+        cb.closest('.check-item').classList.toggle('done', cb.checked);
+      });
+      updateCheckProgress();
+    }
+    function resetChecklist() {
+      document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+        localStorage.removeItem('sanin_chk_' + cb.dataset.key);
+        cb.checked = false;
+        cb.closest('.check-item').classList.remove('done');
+      });
+      updateCheckProgress();
+    }
+    function updateCheckProgress() {
+      const all = document.querySelectorAll('.check-item input[type="checkbox"]');
+      const checked = Array.from(all).filter(c => c.checked).length;
+      document.getElementById('checkProgress').textContent = `✅ 完成度：${checked} / ${all.length}`;
+    }
+
+    goToSlide(0);
+    renderOnsenChoice();
+    loadChecks();
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# ==========================================================
+# Travel LLM Wiki + Obsidian .gitignore
+# ==========================================================
+
+# 1. Obsidian 動態視窗狀態與快取（支援根目錄與子目錄 Vault）
+**/.obsidian/workspace.json
+**/.obsidian/workspace-mobile.json
+**/.obsidian/cache
+**/.trash/
+
+# 2. 作業系統與編輯器暫存檔
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*~
+
+# 3. 本地環境與憑證保護（若有）
+.env
+*.local
